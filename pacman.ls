@@ -4,14 +4,20 @@ draw = (probs) ->
 
 random-path = (length, probs) -> [draw probs for til length]
 
-class Vec
-	(...@els) ~>
-	plus: (zip-with (+), @els) . (.els)
-	neg:~ -> Vec.apply null, (map negate, @els)
-	for let k, i of {x: 0, y: 1, z: 2, w: 3}
-		Object.define-property @prototype, k, do
-			get: -> @els[i]
-			set: (@els[i]) ->
+vec-add = zip-with (+)
+
+class Grid
+	(@width, @height) -> @walls = [0 for til @width * @height * 2]
+	of: (^^[x,y],[dx,dy]) ->
+		pos = [(x + dx) %% @width, (y + dy) %% @height]
+		if dx + dy > 0 then [x,y] = pos
+		i = 2 * (x + y * @width)
+		++i if dy
+		walls = @walls
+		pos: pos
+		wall:~
+			-> walls[i]
+			(walls[i]) ->
 
 class Maze
 	(@width, @height) ->
