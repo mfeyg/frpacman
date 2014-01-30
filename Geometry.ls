@@ -39,7 +39,7 @@ collision-interval = (rect1, rect2) ->
      | i? and j? =>
         I <- maybe when-intersect i,j
         L <- maybe go i-s, js
-        intersection I,L
+        intersection I, L
     go rect1, rect2 `at` rect1.time
 
 module.exports = {interval, len, intersection, shift-by,  rectangle, at, velocity, stop, set-velocity, collision-interval}

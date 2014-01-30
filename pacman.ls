@@ -28,12 +28,6 @@ compare = (a,b) -->
 
 compare-by = (f,a,b) --> compare f(a), f(b)
 
-
-
-
-
-
-
 # (Object, Object) -> [Object]
 break-at = (obj, wall) ->
   h = intersection wall.0, obj.0
@@ -44,7 +38,6 @@ break-at = (obj, wall) ->
   first-half[i] = (interval wall[i]a, obj[i]a) <<< v: wall[i]v
   second-half[i] = interval obj[i]b, wall[i]b <<< v: wall[i]v
   filter (.[i]?), [first-half, second-half]
-
 
 # (Object,Object) -> [Object]
 collision = commutative-multimethod (.type)
@@ -125,8 +118,6 @@ create = (type, x-span, y-span, v = [0 0]) ->
   |> set-velocity _, v
   |> (<<< {type})
 
-
-
 roller = (create \roller [0 1] [0 1] [0 1]) <<<
   action: (board) ->
     if board.time < 10
@@ -139,7 +130,6 @@ roller = (create \roller [0 1] [0 1] [0 1]) <<<
           v = [-v.1, v.0]
         #console.log v.0, v.1
         set-velocity roller `at` time, v
-
 
 grid = [create \wall [i,i] [0 10] for i from 0 to 10] ++ [create \wall [0 10] [i,i] for i from 0 to 10]
 
